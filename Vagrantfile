@@ -18,8 +18,8 @@ hostname        = "translation.dev"
 #   172.16.0.1  - 172.31.255.254
 #   192.168.0.1 - 192.168.255.254
 server_ip             = "192.168.22.10"
-server_memory         = "512" # MB
-server_swap           = "1024" # Options: false | int (MB) - Guideline: Between one or two times the server_memory
+server_memory         = "1024" # MB
+server_swap           = "2048" # Options: false | int (MB) - Guideline: Between one or two times the server_memory
 
 # UTC        for Universal Coordinated Time
 # EST        for Eastern Standard Time
@@ -78,16 +78,12 @@ Vagrant.configure("2") do |config|
   # Set server to Ubuntu 14.04
   config.vm.box = "ubuntu/trusty64"
 
-  config.vm.define "Translate" do |vapro|
+  config.vm.provision "shell" do |s|
+    s.inline = "apt-get install -y xfce4 virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11"
+    s.inline = "VBoxClient-all"
   end
 
-  config.vm.provider "Laravel-vagrant" do |vb|
-  #   # Display the VirtualBox GUI when booting the machine
-     vb.gui = true
-  #
-  #   # Customize the amount of memory on the VM:
-     vb.memory = "1024"
-  end
+  config.vm.gui = true
 
 
   # Create a hostname, don't forget to put it to the `hosts` file
