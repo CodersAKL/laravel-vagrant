@@ -27,14 +27,12 @@ sudo cp -u -r $2-tmp/* $2
 
 sudo rm -r -f $2-tmp/
 
-sudo ln -s /usr/share/phpmyadmin $3
-
 sleep 10
 
 cd $2
 
 echo ">>>> Run laravel commands for first run"
-php artisan dump-autoload
+composer dump-autoload
 php artisan migrate
 php artisan db:seed
 
