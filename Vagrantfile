@@ -57,11 +57,10 @@ composer_packages     = [        # List any global Composer packages that you wa
 # Default web server document root
 # Symfony's public directory is assumed "web"
 # Laravel's public directory is assumed "public"
-public_folder         = "/vagrant/app/public"
+public_folder         = "/vagrant/public"
 
 laravel_root_folder   = "/vagrant" # Where to install Laravel. Will `composer install` if a composer.json file exists
 laravel_version       = "latest-stable" # If you need a specific version of Laravel, set it here
-symfony_root_folder   = "/vagrant/symfony" # Where to install Symfony.
 
 nodejs_version        = "latest"   # By default "latest" will equal the latest stable version
 nodejs_packages       = [          # List any global NodeJS packages that you want to install
@@ -82,7 +81,7 @@ Vagrant.configure("2") do |config|
   config.vm.define "Translate" do |vapro|
   end
 
-  config.vm.provider "virtualbox" do |vb|
+  config.vm.provider "Laravel-vagrant" do |vb|
   #   # Display the VirtualBox GUI when booting the machine
      vb.gui = true
   #
@@ -108,7 +107,7 @@ Vagrant.configure("2") do |config|
   # If using VirtualBox
   config.vm.provider :virtualbox do |vb|
 
-    vb.name = "Translate"
+    vb.name = "Laravel-vagrant"
 
     # Set server memory
     vb.customize ["modifyvm", :id, "--memory", server_memory]
@@ -290,9 +289,6 @@ Vagrant.configure("2") do |config|
   # Provision Laravel
   # config.vm.provision "shell", path: "#{github_url}/scripts/laravel.sh", privileged: false, args: [server_ip, laravel_root_folder, public_folder, laravel_version]
 
-  # Provision Symfony
-  # config.vm.provision "shell", path: "#{github_url}/scripts/symfony.sh", privileged: false, args: [server_ip, symfony_root_folder, public_folder]
-
   # Install Screen
   config.vm.provision "shell", path: "#{github_url}/scripts/screen.sh"
 
@@ -307,6 +303,6 @@ Vagrant.configure("2") do |config|
   # Any local scripts you may want to run post-provisioning.
   # Add these to the same directory as the Vagrantfile.
   ##########
-  config.vm.provision "shell", path: "./local-script.sh", args: [mysql_root_password, laravel_root_folder]
+  config.vm.provision "shell", path: "./local-script.sh", args: [mysql_root_password, laravel_root_folder, public_folder]
 
 end

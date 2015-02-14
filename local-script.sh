@@ -10,11 +10,32 @@ $MYSQL -uroot -p$1 -e "create database laravel;"
 
 echo ">>>> Running migrations and seeders"
 
-cd /vagrant
+# some usefull stuff
+sudo apt-get install -qq mc
 
 # Install laravel
-composer create-project laravel/laravel $2 --prefer-source
+composer create-project laravel/laravel $2-tmp --prefer-source
 
+sudo apt-get install -qq phpmyadmin
+
+echo ">>>> Project created - moving files"
+sleep 5
+
+# move all files to specified directory https://github.com/composer/composer/issues/1135
+
+# allow in windows host to create symlinks http://superuser.com/questions/124679/how-do-i-create-a-link-in-windows-7-home-premium-as-a-regular-user?answertab=votes#125981
+sudo cp -u -r $2-tmp/* $2
+
+sudo rm -r -f $2-tmp/
+
+sudo ln -s /usr/share/phpmyadmin $3
+
+sleep 10
+
+cd $2
+
+echo ">>>> Run laravel commands for first run"
+php artisan dump-autoload
 php artisan migrate
 php artisan db:seed
 
