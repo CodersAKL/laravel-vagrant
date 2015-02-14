@@ -11,12 +11,11 @@ $MYSQL -uroot -p$1 -e "create database laravel;"
 echo ">>>> Running migrations and seeders"
 
 # some usefull stuff
-sudo apt-get install -qq mc
+sudo apt-get install -qq -y xfce4 virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11 mc
+sudo VBoxClient-all
 
 # Install laravel
 composer create-project laravel/laravel $2-tmp --prefer-source
-
-sudo apt-get install -qq phpmyadmin
 
 echo ">>>> Project created - moving files"
 sleep 5

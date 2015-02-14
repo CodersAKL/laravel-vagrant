@@ -78,13 +78,9 @@ Vagrant.configure("2") do |config|
   # Set server to Ubuntu 14.04
   config.vm.box = "ubuntu/trusty64"
 
-  config.vm.provision "shell" do |s|
-    s.inline = "apt-get install -y xfce4 virtualbox-guest-dkms virtualbox-guest-utils virtualbox-guest-x11"
-    s.inline = "VBoxClient-all"
+  config.vm.provider "virtualbox" do |v|
+	v.gui = true
   end
-
-  config.vm.gui = true
-
 
   # Create a hostname, don't forget to put it to the `hosts` file
   # This will point to the server's default virtual host
