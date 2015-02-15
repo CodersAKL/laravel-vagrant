@@ -1,0 +1,29 @@
+application: cedar-unison-855
+version: 1
+runtime: php
+api_version: 1
+
+handlers:
+
+- url: /favicon\.ico
+  static_files: public/favicon.ico
+  upload: public/favicon\.ico
+
+- url: /public/(.*\.(htm$|html$|css$|js$|png$))
+  static_files: public/assets/\1
+  upload: public/(js|css|img)/(.*\.(htm$|html$|css$|js$|png$|jpg$))
+  application_readable: true
+
+- url: /.*
+  script: public/index.php
+  
+env_variables:
+# change these values as appropriate:
+ DEVELOPMENT_DB_HOST: 'localhost'
+ DEVELOPMENT_DB_USERNAME: 'root'
+ DEVELOPMENT_DB_PASSWORD: 'root'
+ DEVELOPMENT_DB_NAME: 'laravel'
+ PRODUCTION_CLOUD_SQL_INSTANCE: '/cloudsql/your-project-name:your-instance-name'
+ PRODUCTION_DB_USERNAME: 'laravel_user'
+ PRODUCTION_DB_PASSWORD: 'your_password'
+ PRODUCTION_DB_NAME: 'laravel_db'
