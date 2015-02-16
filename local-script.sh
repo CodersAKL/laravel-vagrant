@@ -15,7 +15,12 @@ sudo apt-get install -qq -y xfce4 virtualbox-guest-dkms virtualbox-guest-utils v
 sudo VBoxClient-all
 
 # Install laravel
-composer config github-oauth.github.com 39616e715e915750c9bd8926d4f3c31043fd886a
+composer init --name "Laravel-vagrant" --description "Easy way to run laravel environment" --author "FDiskas" --homepage "https://github.com/FDiskas/laravel-vagrant"
+if [ ! -z "$5" ]
+  then
+    echo ">>>> Seting up GitHub Auth key"
+	composer config github-oauth.github.com $5
+fi
 composer create-project laravel/laravel $2-tmp
 
 echo ">>>> Project created - moving files"

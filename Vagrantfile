@@ -33,6 +33,7 @@ github_username = "fideloper"
 github_repo     = "Vaprobash"
 github_branch   = "1.1.0"
 github_url      = "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}"
+github_auth_key = ""
 
 # Languages and Packages
 php_timezone          = "UTC"    # http://php.net/manual/en/timezones.php
@@ -297,6 +298,6 @@ Vagrant.configure("2") do |config|
   # Any local scripts you may want to run post-provisioning.
   # Add these to the same directory as the Vagrantfile.
   ##########
-  config.vm.provision "shell", path: "./local-script.sh", args: [mysql_root_password, laravel_root_folder, server_ip, hostname]
+  config.vm.provision "shell", path: "./local-script.sh", args: [mysql_root_password, laravel_root_folder, server_ip, hostname, github_auth_key]
 
 end
