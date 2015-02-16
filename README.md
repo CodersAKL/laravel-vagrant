@@ -29,6 +29,7 @@ This will install
   1. Ruby
   1. SASS
   1. COMPASS
+  1. Bootstrap-sass
   1. Composer
   1. PHP 5.5
   1. MySQL 5.5
@@ -37,9 +38,19 @@ This will install
   1. Memcached
   1. Nodejs
   
-By default this vagrant starting with GUI, so no need to conect to the server via SSH. Default login is 
+By default this vagrant starting with GUI, so no need to connect to the server via SSH. Default login is 
+
 ```
 User: vagrant
 Pass: vagrant
 ```
+Login to the server using SSH
+
+```
+user: vagrant
+host: 127.0.0.1
+port: 2222
+ssh url: ssh://vagrant@127.0.0.1:2222
+```
+
 Scripts for installing tools is used from https://github.com/fideloper/Vaprobash
