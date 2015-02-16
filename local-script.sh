@@ -51,6 +51,6 @@ echo ">>>> Creating secret key"
 php artisan key:generate
 
 echo ">>>> *************"
-echo ">>>> add to hosts file"
+echo ">>>> All done now add to hosts file"
 echo ">>>> "$3 $4
 echo ">>>> *************"
