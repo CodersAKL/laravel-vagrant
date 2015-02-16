@@ -71,3 +71,5 @@ storage/framework/compiled.php
 storage/framework/services.json
 storage/framework/cache/*
 storage/logs/*
+
+.sass-cache/
