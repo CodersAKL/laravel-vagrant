@@ -8,10 +8,20 @@ Simple checkout this repository and then run the command
 ```vagrant up```
 
 ### Windows users
-ran this command before ```vagrant up``` in an admin command prompt on windows :
+ [Recommended terminal for windows][1]
+ [1]: http://bliker.github.io/cmder/
 
-```fsutil behavior set SymlinkEvaluation L2L:1 R2R:1 L2R:1 R2L:1```
+ran this command before ```vagrant up``` in an **admin** command prompt on windows :
 
+```
+fsutil behavior set SymlinkEvaluation L2L:1 R2R:1 L2R:1 R2L:1
+```
+
+then go to your project dir and run as **admin**. More info why https://github.com/mitchellh/vagrant/issues/713
+
+```
+vagrant up
+```
 
 This will install
   1. Ubuntu 14.04 x64
