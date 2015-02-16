@@ -1,12 +1,6 @@
 # -*- mode: ruby -*-
 # vi: set ft=ruby :
 
-# Config Github Settings
-github_username = "fideloper"
-github_repo     = "Vaprobash"
-github_branch   = "1.1.0"
-github_url      = "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}"
-
 # Server Configuration
 
 hostname        = "translation.dev"
@@ -33,6 +27,12 @@ mysql_version         = "5.5"    # Options: 5.5 | 5.6
 mysql_enable_remote   = "true"  # remote access enabled when true
 pgsql_root_password   = "root"   # We'll assume user "root"
 mongo_enable_remote   = "false"  # remote access enabled when true
+
+# Config Github Settings
+github_username = "fideloper"
+github_repo     = "Vaprobash"
+github_branch   = "1.1.0"
+github_url      = "https://raw.githubusercontent.com/#{github_username}/#{github_repo}/#{github_branch}"
 
 # Languages and Packages
 php_timezone          = "UTC"    # http://php.net/manual/en/timezones.php
@@ -78,7 +78,11 @@ Vagrant.configure("2") do |config|
   # Set server to Ubuntu 14.04
   config.vm.box = "ubuntu/trusty64"
 
+  config.vm.define "laravel" do |laravel|
+  end
+
   config.vm.provider "virtualbox" do |v|
+    v.customize ["setextradata", :id, "VBoxInternal2/SharedFoldersEnableSymlinksCreate/vagrant-root", "1"]
 	v.gui = true
   end
 
@@ -98,8 +102,6 @@ Vagrant.configure("2") do |config|
 
   # If using VirtualBox
   config.vm.provider :virtualbox do |vb|
-
-    vb.name = "Laravel-vagrant"
 
     # Set server memory
     vb.customize ["modifyvm", :id, "--memory", server_memory]
@@ -165,7 +167,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", path: "#{github_url}/scripts/php.sh", args: [php_timezone, hhvm]
 
   # Enable MSSQL for PHP
-   config.vm.provision "shell", path: "#{github_url}/scripts/mssql.sh"
+  # config.vm.provision "shell", path: "#{github_url}/scripts/mssql.sh"
 
   # Provision Vim
   # config.vm.provision "shell", path: "#{github_url}/scripts/vim.sh", args: github_url
@@ -193,7 +195,7 @@ Vagrant.configure("2") do |config|
   # config.vm.provision "shell", path: "#{github_url}/scripts/pgsql.sh", args: pgsql_root_password
 
   # Provision SQLite
-  # config.vm.provision "shell", path: "#{github_url}/scripts/sqlite.sh"
+  config.vm.provision "shell", path: "#{github_url}/scripts/sqlite.sh"
 
   # Provision RethinkDB
   # config.vm.provision "shell", path: "#{github_url}/scripts/rethinkdb.sh", args: pgsql_root_password
@@ -266,7 +268,7 @@ Vagrant.configure("2") do |config|
   ##########
 
   # Install Nodejs
-  # config.vm.provision "shell", path: "#{github_url}/scripts/nodejs.sh", privileged: false, args: nodejs_packages.unshift(nodejs_version, github_url)
+   config.vm.provision "shell", path: "#{github_url}/scripts/nodejs.sh", privileged: false, args: nodejs_packages.unshift(nodejs_version, github_url)
 
   # Install Ruby Version Manager (RVM)
   # config.vm.provision "shell", path: "#{github_url}/scripts/rvm.sh", privileged: false, args: ruby_gems.unshift(ruby_version)
