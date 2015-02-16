@@ -44,6 +44,7 @@ sleep 10
 cd $2
 
 # install SASS, Compass and setup a project
+apt-get install -qq mc
 apt-get install -qq ruby-dev
 gem install bootstrap-sass
 gem install sass
