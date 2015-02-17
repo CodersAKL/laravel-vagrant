@@ -44,12 +44,14 @@ sleep 10
 cd $2
 
 # install SASS, Compass and setup a project
+echo ">>>> Setup SASS, COMPASS and Bootstrap and create a project for this"
 apt-get install -qq mc
 apt-get install -qq ruby-dev
 gem install bootstrap-sass
 gem install sass
 gem install compass
 compass create --sass-dir "resources/assets/sass" --css-dir "public/css" --javascripts-dir "public/js" --images-dir "public/img" --fonts-dir "public/fonts" --config settings.rb -r bootstrap-sass --using bootstrap
+#compass watch --pull
 
 echo ">>>> Run laravel commands for first run"
 composer dump-autoload
@@ -65,5 +67,5 @@ echo ">>>> *************"
 echo ">>>> All done now add to hosts file"
 echo ">>>> "$3 $4
 echo ">>>> *************"
-echo ">>>> If you using SASS/compass now you can run in terminal: compass compile"
+echo ">>>> If you using SASS/compass now you can run in terminal: compass compile or compass watch --pull"
 echo ">>>> *************"

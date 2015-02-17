@@ -1,1 +1,2 @@
- sourcemap = true
+sourcemap = true
+line_comments = false

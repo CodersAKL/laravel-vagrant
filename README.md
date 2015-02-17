@@ -53,4 +53,11 @@ port: 2222
 ssh url: ssh://vagrant@127.0.0.1:2222
 ```
 
+#### For COMPASS users
+please use the --poll setting in watch command see: https://github.com/Compass/compass/issues/394
+
+```
+compass watch /vagrant --poll
+```
+
 Scripts for installing tools is used from https://github.com/fideloper/Vaprobash
