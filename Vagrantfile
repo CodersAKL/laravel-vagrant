@@ -71,6 +71,16 @@ nodejs_packages       = [          # List any global NodeJS packages that you wa
   #"yo",
 ]
 
+required_plugins = ["vagrant-hostmanager", "vagrant-winnfsd"]
+required_plugins.each do |plugin|
+	if Vagrant.has_plugin?(plugin) then
+	    system "echo OK: #{plugin} already installed"
+	else
+	    system "echo Not installed required plugin: #{plugin} ..."
+		system "vagrant plugin install #{plugin}"
+	end
+end
+
 Vagrant.configure("2") do |config|
 
   config.ssh.username = "vagrant"
@@ -87,10 +97,14 @@ Vagrant.configure("2") do |config|
 	v.gui = true
   end
 
-  # Create a hostname, don't forget to put it to the `hosts` file
-  # This will point to the server's default virtual host
-  # TO DO: Make this work with virtualhost along-side xip.io URL
+  # Create a hostname
   config.vm.hostname = hostname
+
+  onfig.hostmanager.enabled = true
+  config.hostmanager.manage_host = true
+  config.hostmanager.ignore_private_ip = false
+  config.hostmanager.include_offline = true
+  config.hostmanager.aliases = [hostname]
 
   # Create a static IP
   config.vm.network :private_network, ip: server_ip
@@ -125,19 +139,6 @@ Vagrant.configure("2") do |config|
     # Set server memory
     vb.vmx["memsize"] = server_memory
 
-  end
-
-  # If using Vagrant-Cachier
-  # http://fgrehm.viewdocs.io/vagrant-cachier
-  if Vagrant.has_plugin?("vagrant-cachier")
-    # Configure cached packages to be shared between instances of the same base box.
-    # Usage docs: http://fgrehm.viewdocs.io/vagrant-cachier/usage
-    config.cache.scope = :box
-
-    config.cache.synced_folder_opts = {
-        type: :nfs,
-        mount_options: ['rw', 'vers=3', 'tcp', 'nolock']
-    }
   end
 
   # Adding vagrant-digitalocean provider - https://github.com/smdahlen/vagrant-digitalocean
