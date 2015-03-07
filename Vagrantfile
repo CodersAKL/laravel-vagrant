@@ -105,16 +105,16 @@ if Vagrant.has_plugin?("vagrant-hostmanager")
   config.hostmanager.manage_host = true
   config.hostmanager.ignore_private_ip = false
   config.hostmanager.include_offline = true
-  config.hostmanager.aliases = [hostname]
+  config.hostmanager.aliases = ["admin.#{hostname}"]
 end
 
   # Create a static IP
   config.vm.network :private_network, ip: server_ip
 
   config.vm.synced_folder "./", "/vagrant/",
-	 :owner=> 'www-data',
-	 :group=>'vagrant',
-	 :mount_options => ['dmode=775', 'fmode=775']
+	 :id => 'vagrant',
+	 :nfs => true,
+	 :mount_options => ['nolock,vers=3,udp,noatime']
 
   # If using VirtualBox
   config.vm.provider :virtualbox do |vb|
