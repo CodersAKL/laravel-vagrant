@@ -100,7 +100,7 @@ Vagrant.configure("2") do |config|
   # Create a hostname
   config.vm.hostname = hostname
 
-  onfig.hostmanager.enabled = true
+  config.hostmanager.enabled = true
   config.hostmanager.manage_host = true
   config.hostmanager.ignore_private_ip = false
   config.hostmanager.include_offline = true
