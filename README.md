@@ -61,3 +61,7 @@ compass watch /vagrant --poll
 ```
 
 Scripts for installing tools is used from https://github.com/fideloper/Vaprobash
+
+1. https://github.com/barryvdh/laravel-debugbar
+1. https://github.com/mcamara/laravel-localization
+1. https://github.com/Zizaco/entrust/tree/laravel-5

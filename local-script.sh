@@ -43,6 +43,10 @@ sleep 10
 
 cd $2
 
+composer require barryvdh/laravel-ide-helper
+composer require barryvdh/laravel-debugbar
+composer require mcamara/laravel-localization
+
 # install SASS, Compass and setup a project
 echo ">>>> Setup SASS, COMPASS and Bootstrap and create a project for this"
 apt-get install -qq mc
@@ -62,6 +66,10 @@ php artisan db:seed
 
 echo ">>>> Creating secret key"
 php artisan key:generate
+
+echo ">>> Generating IDE helper"
+php artisan ide-helper:generate
+php artisan ide-helper:models
 
 echo ">>>> *************"
 echo ">>>> All done now add to hosts file"

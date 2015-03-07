@@ -100,20 +100,21 @@ Vagrant.configure("2") do |config|
   # Create a hostname
   config.vm.hostname = hostname
 
+if Vagrant.has_plugin?("vagrant-hostmanager")
   config.hostmanager.enabled = true
   config.hostmanager.manage_host = true
   config.hostmanager.ignore_private_ip = false
   config.hostmanager.include_offline = true
   config.hostmanager.aliases = [hostname]
+end
 
   # Create a static IP
   config.vm.network :private_network, ip: server_ip
 
-  # Use NFS for the shared folder
-  config.vm.synced_folder ".", "/vagrant",
-            id: "core",
-            :nfs => true,
-            :mount_options => ['']
+  config.vm.synced_folder "./", "/vagrant/",
+	 :owner=> 'www-data',
+	 :group=>'vagrant',
+	 :mount_options => ['dmode=775', 'fmode=775']
 
   # If using VirtualBox
   config.vm.provider :virtualbox do |vb|
