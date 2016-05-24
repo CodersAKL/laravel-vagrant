@@ -9,7 +9,7 @@ Simple checkout this repository and then run the command
 
 ### Windows users
  [Recommended terminal for windows][1]
- [1]: http://bliker.github.io/cmder/
+ [1]: http://conemu.github.io/
 
 ran this command before ```vagrant up``` in an **admin** command prompt on windows :
 
